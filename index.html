@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOE-ViR24 Info</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto Mono', monospace;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #FFFDFD;
+        }
+        .content {
+            width: 90%;
+            max-width: 600px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        .header {
+            position: relative;
+            width: 100%;
+        }
+        .header img {
+            width: 100%;
+            height: auto;
+        }
+        .text {
+            margin: 20px 0;
+            text-align: justify;
+            font-size: 14px;
+            line-height: 1.5;
+            color: #3C0C3E;
+            font-weight: 700; /* Bold */
+        }
+        .question-section {
+            background-color: #f8f8f8;
+            padding: 20px;
+            margin: 20px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            text-align: left;
+        }
+        .question {
+            font-weight: 300; /* Light */
+            color: #FF0000;
+        }
+        .hint {
+            margin-top: 10px;
+            font-style: italic;
+            color: #BABDE4;
+            font-weight: 300; /* Light */
+        }
+        .svg-placeholder {
+            width: 100%;
+            height: 300px; /* Adjust the height as needed */
+            margin: 20px 0;
+        }
+        .svg-placeholder img {
+            width: 100%;
+            height: 100%;
+        }
+        /* Lock screen styles */
+        #lockScreen, #content {
+            width: 100%;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        #lockScreen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        #logo {
+            width: 20vw; /* Adjust for mobile using viewport width */
+            max-width: 100px; /* Optional, to limit max width */
+            margin-bottom: 20px;
+        }
+
+        #passwordInput {
+            padding: 10px;
+            font-size: 1.2em;
+            border: 1px solid #3C0C3E; /* Border color for input */
+            border-radius: 5px;
+            outline: none;
+            text-align: center;
+            width: 80%; /* Adjust for mobile */
+            max-width: 300px; /* Optional, to limit max width */
+        }
+
+        #unlockButton {
+            padding: 10px 20px;
+            font-size: 1.2em;
+            margin-top: 10px;
+            background: linear-gradient(45deg, #FF8C8C, #FF3D3D);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 80%; /* Adjust for mobile */
+            max-width: 300px; /* Optional, to limit max width */
+        }
+
+        #content {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            padding-bottom: 200px; /* Adjust for mobile */
+        }
+
+        #logoContent {
+            width: 20vw; /* Adjust for mobile using viewport width */
+            max-width: 100px; /* Optional, to limit max width */
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            margin-top: 0;
+        }
+
+        p {
+            margin: 0 20px;
+            text-align: justify;
+            font-size: 0.9em; /* Adjust for mobile */
+        }
+
+        #gameBoard {
+            display: flex;
+            justify-content: space-between; /* Ensure horizontal alignment */
+            align-items: center;
+            gap: 2vw; /* Small gap for mobile, using viewport width */
+            margin: 20px 0;
+            width: 90vw; /* Ensure the game board takes up most of the screen width */
+            max-width: 600px; /* Optional, to limit max width */
+        }
+
+        .selectable {
+            width: 15vw; /* Adjust for mobile using viewport width */
+            max-width: 70px; /* Optional, to limit max width */
+            height: auto; /* Maintain aspect ratio */
+            cursor: pointer;
+            display: block;
+            margin: 0;
+        }
+
+        #gradientOverlay {
+            width: 100%; /* Make the overlay width responsive */
+            height: auto;
+            margin: 20px auto; /* Center the overlay vertically */
+            display: block;
+        }
+
+        .gradient-label {
+            display: flex;
+            justify-content: space-between;
+            width: calc(100% - 40px); /* Same width as the body text (20px padding on each side) */
+            max-width: calc(600px - 40px); /* Optional, to limit max width */
+            margin: 10px auto; /* Center the labels horizontally */
+            position: relative;
+        }
+
+        #message {
+            font-size: 1em; /* Adjust for mobile */
+            color: red;
+            opacity: 0;
+            transition: opacity 1s linear;
+            position: absolute; /* Use absolute to position relative to the container */
+            top: 50%; /* Center vertically */
+            left: 50%; /* Center horizontally */
+            transform: translate(-50%, -50%); /* Center the element */
+            display: none;
+            width: 80%; /* Adjust for mobile */
+            max-width: 300px; /* Optional, to limit max width */
+        }
+
+        .label {
+            position:relative;
+            margin: -20px;
+            z-index: 1;
+        }
+
+        .gradient-label span {
+            font-size: 0.9em; /* Adjust for mobile */
+        }
+
+        #img8 {
+            transition: opacity 1s linear;
+            width: 20vw; /* Adjust for mobile using viewport width */
+            max-width: 100px; /* Optional, to limit max width */
+            position: relative;
+        }
+
+        .test {
+            margin-top: 100px; /* Adjust for mobile */
+            position: relative;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        /* Define specific font styles */
+        .roboto-mono-bold {
+            font-weight: 700;
+            margin: 20px;
+        }
+
+        .roboto-mono-italic {
+            font-style: italic;
+        }
+
+        .roboto-mono-light {
+            font-weight: 300;
+        }
+
+        .roboto-mono-regular {
+            font-weight: 400;
+        }
+
+        /* animation */
+        @keyframes fade-in {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fade-out {
+            from {
+                opacity: 1;
+            }
+
+            to {
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="lockScreen">
+        <img src="images/logo.svg" id="logo" alt="Logo">
+        <h2 class="roboto-mono-bold">Enter the letter from the previous station (#7)</h2>
+        <input type="text" id="passwordInput" maxlength="1" placeholder="Enter 1-letter password" class="roboto-mono-light">
+        <button id="unlockButton" class="roboto-mono-regular">unlock</button>
+    </div>
+
+    <div id="content">
+        <div class="content">
+            <div class="header">
+                <!-- Image for the top of the page -->
+                <img src="images/above.png" alt="Above Image">
+            </div>
+            <div class="text">
+                Symptoms of TOE-ViR24 are produced through the hijacking of the brain’s metabolic functions by the virus. Well known viruses such as Herpes Simplex Virus (HSV) and Human Immunodeficiency Virus (HIV) can lead to inflammations of the brain and various neurocognitive disorders, but what makes TOE-ViR24 unusual is that the severity of the symptoms is dependant on which part of the brain is most affected by the virus. In mild cases, TOE-ViR24 mostly targets the frontal lobe, while in more severe cases, it predominantly targets the amygdala, leading to less predictable and often more strenuous symptoms.
+            </div>
+            <div class="svg-placeholder">
+                <!-- SVG file for the text area -->
+                <img src="images/text.svg" alt="Text SVG">
+            </div>
+            <div class="question-section">
+                <div class="question">
+                    ? Question: In severe cases, which part of the brain is primarily affected by TOE-ViR24?
+                </div>
+                <div class="hint">
+                    💡 Hint: The answer is the name of a brain region. The first letter of this brain region is the letter you need. P.S. Do not forget to place the correct letter at the indicated space on the card received at the beginning of the tour.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('unlockButton').addEventListener('click', function() {
+            var passwordInput = document.getElementById('passwordInput').value;
+            var correctPassword = ['L', 'l'];
+
+            if (correctPassword.includes(passwordInput)) {
+                document.getElementById('lockScreen').style.display = 'none';
+                document.getElementById('content').style.display = 'flex';
+            } else {
+                alert('Incorrect password. Please try again.');
+            }
+        });
+    </script>
+</body>
+</html>
